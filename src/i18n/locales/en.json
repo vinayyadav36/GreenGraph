@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "courses": "Courses",
+    "quiz": "Practice Quiz",
+    "profile": "Profile",
+    "admin": "Admin",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out"
+  },
+  "landing": {
+    "heroTitle": "Learn Without Limits at Forever University",
+    "heroSubtitle": "Access world-class courses, practice exams, and track your progress — all in one place.",
+    "getStarted": "Get Started Free",
+    "browseCourses": "Browse Courses",
+    "featuredCourses": "Featured Courses",
+    "whyChooseUs": "Why Choose Forever University?",
+    "feature1Title": "Expert-Led Courses",
+    "feature1Desc": "Learn from industry experts and academic professionals with decades of experience.",
+    "feature2Title": "Practice Exams",
+    "feature2Desc": "Test your knowledge with adaptive quizzes and detailed performance analytics.",
+    "feature3Title": "Learn Anywhere",
+    "feature3Desc": "Access content offline and sync when you're back online."
+  },
+  "courses": {
+    "title": "Course Catalog",
+    "search": "Search courses...",
+    "filter": "Filter",
+    "difficulty": "Difficulty",
+    "subject": "Subject",
+    "all": "All",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "enroll": "Enroll Now",
+    "continue": "Continue Learning",
+    "progress": "Progress",
+    "stages": "stages"
+  },
+  "quiz": {
+    "title": "Practice Quiz",
+    "submit": "Submit Answer",
+    "next": "Next Question",
+    "flag": "Flag Question",
+    "confident": "Confident",
+    "guess": "Best Guess",
+    "timeLeft": "Time Left",
+    "question": "Question"
+  },
+  "auth": {
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "displayName": "Display Name",
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "backToSignIn": "Back to Sign In"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish"
+  }
+}
