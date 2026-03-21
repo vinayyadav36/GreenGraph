@@ -5,7 +5,7 @@ import { mockCourses } from '../lib/mockData';
 import { Badge } from '../components/ui/Badge';
 import { Skeleton } from '../components/ui/Skeleton';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
-import { Course } from '../types';
+import { type Course } from '../types';
 
 function DifficultyBadge({ difficulty }: { difficulty: Course['difficultyTag'] }) {
   if (!difficulty) return null;

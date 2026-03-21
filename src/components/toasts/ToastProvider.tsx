@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store';
+import { type RootState, type AppDispatch } from '../../store';
 import { removeToast } from '../../store/uiSlice';
 
 const typeStyles = {

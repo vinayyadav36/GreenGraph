@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
+import { type AppDispatch } from '../store';
 import { markStageComplete } from '../store/progressSlice';
 import { addToast } from '../store/uiSlice';
 import { mockCourses } from '../lib/mockData';

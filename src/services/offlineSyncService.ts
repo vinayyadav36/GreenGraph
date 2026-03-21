@@ -1,5 +1,5 @@
-import { openDB, IDBPDatabase } from 'idb';
-import { ExamSession, ExamResult } from '../types';
+import { openDB, type IDBPDatabase } from 'idb';
+import { type ExamSession, type ExamResult } from '../types';
 
 const DB_NAME = 'forever-university-db';
 const DB_VERSION = 1;

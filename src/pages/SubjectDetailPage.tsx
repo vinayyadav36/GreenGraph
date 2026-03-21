@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { type RootState } from '../store';
 import { mockCourses } from '../lib/mockData';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
+import { type AppDispatch } from '../../store';
 import { addToast } from '../../store/uiSlice';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';

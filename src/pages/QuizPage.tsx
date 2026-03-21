@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
+import { type AppDispatch } from '../store';
 import { addToast } from '../store/uiSlice';
 import { addPoints } from '../store/progressSlice';
 import { mockExamSession, mockQuestions } from '../lib/mockData';

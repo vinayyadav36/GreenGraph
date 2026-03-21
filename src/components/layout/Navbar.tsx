@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store';
+import { type RootState, type AppDispatch } from '../../store';
 import { toggleTheme, setLanguage } from '../../store/uiSlice';
 import { useAuth } from '../../hooks/useAuth';
 import { Avatar } from '../ui/Avatar';

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../store';
+import { type AppDispatch, type RootState } from '../store';
 import { setUser } from '../store/authSlice';
 import { addToast } from '../store/uiSlice';
 import { useAuth } from '../hooks/useAuth';

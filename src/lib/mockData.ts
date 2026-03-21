@@ -1,4 +1,4 @@
-import { Course, Question, ExamResult, ExamSession } from '../types';
+import { type Course, type Question, type ExamResult, type ExamSession } from '../types';
 
 export const mockCourses: Course[] = [
   {

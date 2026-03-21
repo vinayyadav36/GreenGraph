@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { type RootState } from '../store';
 import { mockCourses, mockExamResults } from '../lib/mockData';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
