@@ -1,6 +1,8 @@
 {
   "nav": {
     "courses": "Courses",
+    "exams": "Exams",
+    "resources": "Resources",
     "quiz": "Practice Quiz",
     "profile": "Profile",
     "admin": "Admin",

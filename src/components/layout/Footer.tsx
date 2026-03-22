@@ -36,19 +36,22 @@ export function Footer() {
             <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Platform</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/courses" className="hover:text-white transition-colors">Browse Courses</Link></li>
+              <li><Link to="/exams" className="hover:text-white transition-colors">Competitive Exams</Link></li>
+              <li><Link to="/resources" className="hover:text-white transition-colors">Study Resources</Link></li>
               <li><Link to="/quiz/session-demo-1" className="hover:text-white transition-colors">Practice Quiz</Link></li>
               <li><Link to="/signup" className="hover:text-white transition-colors">Sign Up Free</Link></li>
-              <li><Link to="/signin" className="hover:text-white transition-colors">Sign In</Link></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Subjects</h3>
+            <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Exams</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/courses?subject=Mathematics" className="hover:text-white transition-colors">Mathematics</Link></li>
-              <li><Link to="/courses?subject=Physics" className="hover:text-white transition-colors">Physics</Link></li>
-              <li><Link to="/courses?subject=Computer Science" className="hover:text-white transition-colors">Computer Science</Link></li>
-              <li><Link to="/courses?subject=Economics" className="hover:text-white transition-colors">Economics</Link></li>
+              <li><Link to="/quiz/upsc-session" className="hover:text-white transition-colors">UPSC Civil Services</Link></li>
+              <li><Link to="/quiz/ssc-session" className="hover:text-white transition-colors">SSC CGL</Link></li>
+              <li><Link to="/quiz/banking-session" className="hover:text-white transition-colors">IBPS PO / Banking</Link></li>
+              <li><Link to="/quiz/railway-session" className="hover:text-white transition-colors">RRB NTPC / Railway</Link></li>
+              <li><Link to="/quiz/neet-session" className="hover:text-white transition-colors">NEET UG</Link></li>
+              <li><Link to="/quiz/jee-session" className="hover:text-white transition-colors">JEE Main</Link></li>
             </ul>
           </div>
 

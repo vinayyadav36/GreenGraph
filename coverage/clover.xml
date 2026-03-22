@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1774166800295" clover="3.2.0">
+  <project timestamp="1774166800295" name="All files">
+    <metrics statements="6" coveredstatements="6" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1" elements="17" coveredelements="17" complexity="0" loc="6" ncloc="6" packages="1" files="1" classes="1"/>
+    <file name="Button.tsx" path="/home/runner/work/Student/Student/src/components/ui/Button.tsx">
+      <metrics statements="6" coveredstatements="6" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="20" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="35" count="15" type="cond" truecount="2" falsecount="0"/>
+      <line num="37" count="15" type="stmt"/>
+      <line num="68" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

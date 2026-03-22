@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { type AppDispatch } from '../store';
 import { addToast } from '../store/uiSlice';
 import { addPoints } from '../store/progressSlice';
-import { mockExamSession, mockQuestions } from '../lib/mockData';
+import { mockExamSession, examSessionQuestions } from '../lib/mockData';
 import { useExamTimer } from '../hooks/useExamTimer';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
@@ -26,7 +26,7 @@ export function QuizPage() {
   const session = sessionId === 'session-demo-1' ? mockExamSession : {
     ...mockExamSession,
     sessionId: sessionId || 'demo',
-    questions: mockQuestions.slice(0, 5),
+    questions: examSessionQuestions[sessionId || ''] || examSessionQuestions['session-demo-1'],
   };
 
   const [currentIdx, setCurrentIdx] = useState(0);
