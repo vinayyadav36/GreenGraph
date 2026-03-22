@@ -7,6 +7,8 @@ import { AuthGuard } from './features/auth/AuthGuard';
 
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const CourseCatalogPage = lazy(() => import('./pages/CourseCatalogPage'));
+const ExamSelectPage = lazy(() => import('./pages/ExamSelectPage'));
+const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
 const SubjectDetailPage = lazy(() => import('./pages/SubjectDetailPage'));
 const LessonModulePage = lazy(() => import('./pages/LessonModulePage'));
 const QuizPage = lazy(() => import('./pages/QuizPage'));
@@ -40,6 +42,8 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/courses" element={<CourseCatalogPage />} />
               <Route path="/courses/:id" element={<SubjectDetailPage />} />
+              <Route path="/exams" element={<ExamSelectPage />} />
+              <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/lessons/:stageId" element={<LessonModulePage />} />
               <Route path="/quiz/:sessionId" element={<QuizPage />} />
               <Route path="/results/:resultId" element={<ResultPage />} />

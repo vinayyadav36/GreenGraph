@@ -67,3 +67,31 @@ export interface ExamSession {
   answers: Record<string, { selected: string | string[]; confidence: 'confident' | 'guess'; timeTaken: number }>;
   flagged: string[];
 }
+
+export interface ExamCard {
+  id: string;
+  name: string;
+  fullName: string;
+  category: string;
+  icon: string;
+  color: string;
+  description: string;
+  vacancies: string;
+  examDate: string;
+  difficulty: Difficulty;
+  topics: string[];
+  sessionId: string;
+  questionCount: number;
+}
+
+export interface ResourceLink {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  icon: string;
+  category: string;
+  features: string[];
+  color: string;
+  badge: string;
+}

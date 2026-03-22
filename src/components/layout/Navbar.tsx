@@ -58,6 +58,18 @@ export function Navbar() {
               {t('nav.courses')}
             </Link>
             <Link
+              to="/exams"
+              className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+            >
+              {t('nav.exams')}
+            </Link>
+            <Link
+              to="/resources"
+              className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+            >
+              {t('nav.resources')}
+            </Link>
+            <Link
               to="/quiz/session-demo-1"
               className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
             >
@@ -192,6 +204,12 @@ export function Navbar() {
             </form>
             <Link to="/courses" className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg" onClick={() => setMenuOpen(false)}>
               {t('nav.courses')}
+            </Link>
+            <Link to="/exams" className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg" onClick={() => setMenuOpen(false)}>
+              {t('nav.exams')}
+            </Link>
+            <Link to="/resources" className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg" onClick={() => setMenuOpen(false)}>
+              {t('nav.resources')}
             </Link>
             <Link to="/quiz/session-demo-1" className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg" onClick={() => setMenuOpen(false)}>
               {t('nav.quiz')}
