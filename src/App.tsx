@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { type RootState } from './store';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { ToastProvider } from './components/toasts/ToastProvider';
@@ -31,6 +33,17 @@ function PageLoader() {
 }
 
 function App() {
+  const { theme } = useSelector((state: RootState) => state.ui);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, [theme]);
+
   return (
     <BrowserRouter>
       <a href="#main-content" className="skip-to-content">Skip to main content</a>
