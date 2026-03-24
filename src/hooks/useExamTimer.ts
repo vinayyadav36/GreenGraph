@@ -5,7 +5,10 @@ export function useExamTimer(initialSeconds: number, onExpire?: () => void) {
   const [isRunning, setIsRunning] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const onExpireRef = useRef(onExpire);
-  onExpireRef.current = onExpire;
+
+  useEffect(() => {
+    onExpireRef.current = onExpire;
+  }, [onExpire]);
 
   useEffect(() => {
     if (!isRunning) return;

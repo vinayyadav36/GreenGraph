@@ -62,7 +62,11 @@ export function QuizPage() {
     if (!currentQ) return;
     setFlagged((prev) => {
       const next = new Set(prev);
-      next.has(currentQ.id) ? next.delete(currentQ.id) : next.add(currentQ.id);
+      if (next.has(currentQ.id)) {
+        next.delete(currentQ.id);
+      } else {
+        next.add(currentQ.id);
+      }
       return next;
     });
   };
