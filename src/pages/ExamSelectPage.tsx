@@ -1,7 +1,11 @@
 import { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { type RootState, type AppDispatch } from '../store';
 import { examCards } from '../lib/mockData';
 import { type ExamCard } from '../types';
+import { useSubscriptions } from '../hooks/useSubscriptions';
+import { addToast } from '../store/uiSlice';
 
 const categoryColors: Record<string, string> = {
   'Central Government': 'bg-blue-100 text-blue-700',
@@ -33,6 +37,32 @@ function DifficultyDots({ difficulty }: { difficulty: ExamCard['difficulty'] }) 
 }
 
 function ExamCardComponent({ exam }: { exam: ExamCard }) {
+  const { isSubscribed, subscribe, unsubscribe } = useSubscriptions();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const [subLoading, setSubLoading] = useState(false);
+  const subscribed = isSubscribed(exam.id);
+
+  const handleSubscribeToggle = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      dispatch(addToast({ message: 'Please sign in to subscribe to exams.', type: 'info' }));
+      navigate('/signin');
+      return;
+    }
+    setSubLoading(true);
+    if (subscribed) {
+      const ok = await unsubscribe(exam.id);
+      if (ok) dispatch(addToast({ message: `Unsubscribed from ${exam.name}`, type: 'info' }));
+    } else {
+      const ok = await subscribe(exam.id);
+      if (ok) dispatch(addToast({ message: `Subscribed to ${exam.name}! You'll receive updates.`, type: 'success' }));
+      else dispatch(addToast({ message: 'Could not subscribe. Please try again.', type: 'error' }));
+    }
+    setSubLoading(false);
+  };
+
   return (
     <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 duration-200 flex flex-col group">
       {/* Gradient Top Bar */}
@@ -52,6 +82,22 @@ function ExamCardComponent({ exam }: { exam: ExamCard }) {
               </span>
             </div>
           </div>
+          {/* Subscribe Bell */}
+          <button
+            onClick={handleSubscribeToggle}
+            disabled={subLoading}
+            className={`shrink-0 p-1.5 rounded-lg border transition-all ${
+              subscribed
+                ? 'bg-blue-600 border-blue-600 text-white'
+                : 'border-gray-200 text-gray-400 hover:border-blue-400 hover:text-blue-500'
+            }`}
+            aria-label={subscribed ? `Unsubscribe from ${exam.name}` : `Subscribe to ${exam.name}`}
+            title={subscribed ? 'Unsubscribe' : 'Subscribe for updates'}
+          >
+            <svg className="h-4 w-4" fill={subscribed ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </button>
         </div>
 
         {/* Full Name */}

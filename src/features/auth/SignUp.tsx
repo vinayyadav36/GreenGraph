@@ -26,7 +26,7 @@ type FormData = z.infer<typeof schema>;
 
 export function SignUp() {
   const { t } = useTranslation();
-  const { signIn, isLoading } = useAuth();
+  const { signUp, isLoading } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -40,11 +40,12 @@ export function SignUp() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await signIn(data.email, data.password);
+      await signUp(data.email, data.password, data.displayName);
       dispatch(addToast({ message: 'Account created successfully! Welcome to Forever University.', type: 'success' }));
       navigate('/courses');
-    } catch {
-      dispatch(addToast({ message: 'Sign up failed. Please try again.', type: 'error' }));
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Sign up failed. Please try again.';
+      dispatch(addToast({ message: msg, type: 'error' }));
     }
   };
 

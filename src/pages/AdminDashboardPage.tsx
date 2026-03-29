@@ -395,8 +395,15 @@ export function AdminDashboardPage() {
                 <Button variant="secondary" onClick={() => setActiveTab('questions')}>
                   + Add Questions
                 </Button>
-                <Button variant="ghost" onClick={() => alert('Export functionality coming soon!')}>
-                  Export Reports
+                <Button variant="ghost" onClick={() => {
+                    window.open('/api/export/users', '_blank');
+                  }}>
+                  Export Users (Excel)
+                </Button>
+                <Button variant="ghost" onClick={() => {
+                    window.open('/api/export/results', '_blank');
+                  }}>
+                  Export Results (Excel)
                 </Button>
               </div>
             </div>
