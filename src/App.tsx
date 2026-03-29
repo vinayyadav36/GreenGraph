@@ -6,6 +6,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { ToastProvider } from './components/toasts/ToastProvider';
 import { AuthGuard } from './features/auth/AuthGuard';
+import { useAuth } from './hooks/useAuth';
 
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const CourseCatalogPage = lazy(() => import('./pages/CourseCatalogPage'));
@@ -34,6 +35,13 @@ function PageLoader() {
 
 function App() {
   const { theme } = useSelector((state: RootState) => state.ui);
+  const { restoreSession } = useAuth();
+
+  useEffect(() => {
+    // Restore JWT session on page load
+    restoreSession();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;

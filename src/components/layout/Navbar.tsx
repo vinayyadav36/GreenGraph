@@ -6,15 +6,18 @@ import { type RootState, type AppDispatch } from '../../store';
 import { toggleTheme, setLanguage } from '../../store/uiSlice';
 import { useAuth } from '../../hooks/useAuth';
 import { Avatar } from '../ui/Avatar';
+import { NotificationPanel } from '../notifications/NotificationPanel';
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const { theme } = useSelector((state: RootState) => state.ui);
   const { user, isAuthenticated, signOut } = useAuth();
+  const unreadCount = useSelector((state: RootState) => state.notifications.unreadCount);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [notifOpen, setNotifOpen] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,6 +138,28 @@ export function Navbar() {
                 </svg>
               )}
             </button>
+
+            {/* Notification Bell */}
+            {isAuthenticated && (
+              <div className="relative">
+                <button
+                  onClick={() => setNotifOpen((o) => !o)}
+                  className="relative p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                  aria-label="Notifications"
+                  aria-expanded={notifOpen}
+                >
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                  </svg>
+                  {unreadCount > 0 && (
+                    <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center leading-none">
+                      {unreadCount > 9 ? '9+' : unreadCount}
+                    </span>
+                  )}
+                </button>
+                {notifOpen && <NotificationPanel onClose={() => setNotifOpen(false)} />}
+              </div>
+            )}
 
             {/* Auth */}
             {isAuthenticated && user ? (

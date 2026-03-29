@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { type AppDispatch, type RootState } from '../store';
 import { setUser } from '../store/authSlice';
 import { addToast } from '../store/uiSlice';
 import { useAuth } from '../hooks/useAuth';
+import { useSubscriptions } from '../hooks/useSubscriptions';
 import { mockExamResults } from '../lib/mockData';
 import { Avatar } from '../components/ui/Avatar';
 import { Button } from '../components/ui/Button';
@@ -24,6 +26,8 @@ export function ProfilePage() {
   const { user } = useAuth();
   const dispatch = useDispatch<AppDispatch>();
   const progress = useSelector((state: RootState) => state.progress);
+  const subscriptions = useSelector((state: RootState) => state.subscriptions.items);
+  const { unsubscribe } = useSubscriptions();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -175,6 +179,62 @@ export function ProfilePage() {
             </div>
           </div>
         )}
+
+        {/* Subscribed Exams */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-bold text-gray-900 text-lg">Subscribed Exams</h2>
+            <Link
+              to="/exams"
+              className="text-sm text-blue-600 font-medium hover:text-blue-700 hover:underline"
+            >
+              Browse exams →
+            </Link>
+          </div>
+          {subscriptions.length === 0 ? (
+            <div className="text-center py-6">
+              <div className="text-3xl mb-3">🔔</div>
+              <p className="text-gray-500 text-sm">No subscriptions yet.</p>
+              <p className="text-xs text-gray-400 mt-1">Subscribe to exams to receive updates and reminders.</p>
+              <Link
+                to="/exams"
+                className="inline-block mt-4 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Explore Exams
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {subscriptions.map((sub) => (
+                <div key={sub.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                  <div className="flex items-center gap-3">
+                    {sub.exam && (
+                      <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${sub.exam.color} flex items-center justify-center text-sm`}>
+                        {sub.exam.icon}
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-sm font-semibold text-gray-900">{sub.exam?.name || sub.examId}</p>
+                      {sub.exam && (
+                        <p className="text-xs text-gray-400">{sub.exam.category} · {sub.exam.examDate}</p>
+                      )}
+                    </div>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      const ok = await unsubscribe(sub.examId);
+                      if (ok) dispatch(addToast({ message: 'Unsubscribed successfully', type: 'info' }));
+                    }}
+                    className="text-xs text-red-500 hover:text-red-700 font-medium transition-colors"
+                    aria-label={`Unsubscribe from ${sub.exam?.name || sub.examId}`}
+                  >
+                    Unsubscribe
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );

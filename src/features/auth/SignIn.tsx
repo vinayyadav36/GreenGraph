@@ -38,8 +38,9 @@ export function SignIn() {
       await signIn(data.email, data.password);
       dispatch(addToast({ message: 'Welcome back! Signed in successfully.', type: 'success' }));
       navigate('/courses');
-    } catch {
-      dispatch(addToast({ message: 'Sign in failed. Please check your credentials.', type: 'error' }));
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Sign in failed. Please check your credentials.';
+      dispatch(addToast({ message: msg, type: 'error' }));
     }
   };
 
@@ -102,13 +103,6 @@ export function SignIn() {
               {t('nav.signUp')}
             </Link>
           </p>
-
-          {/* Demo hint */}
-          <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-            <p className="text-xs text-blue-700 text-center">
-              <strong>Demo:</strong> Use any email + password (6+ chars) to sign in. Use "admin@..." for admin access.
-            </p>
-          </div>
         </div>
       </div>
     </div>
