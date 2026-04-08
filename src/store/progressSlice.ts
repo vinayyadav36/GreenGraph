@@ -49,8 +49,22 @@ const progressSlice = createSlice({
     addPoints: (state, action: PayloadAction<number>) => {
       state.totalPoints += action.payload;
     },
+    setProgress: (state, action: PayloadAction<Array<{ courseId: string; stageId: string; completed: boolean; completedAt?: string; score?: number }>>) => {
+      state.courseProgress = {};
+      for (const item of action.payload) {
+        if (!state.courseProgress[item.courseId]) {
+          state.courseProgress[item.courseId] = [];
+        }
+        state.courseProgress[item.courseId].push({
+          stageId: item.stageId,
+          completed: item.completed,
+          completedAt: item.completedAt,
+          score: item.score,
+        });
+      }
+    },
   },
 });
 
-export const { markStageComplete, setStreak, addPoints } = progressSlice.actions;
+export const { markStageComplete, setStreak, addPoints, setProgress } = progressSlice.actions;
 export default progressSlice.reducer;

@@ -4,6 +4,7 @@ import uiReducer from './uiSlice';
 import progressReducer from './progressSlice';
 import notificationsReducer from './notificationsSlice';
 import subscriptionsReducer from './subscriptionsSlice';
+import enrollmentsReducer from './enrollmentsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     progress: progressReducer,
     notifications: notificationsReducer,
     subscriptions: subscriptionsReducer,
+    enrollments: enrollmentsReducer,
   },
 });
 

@@ -3,6 +3,8 @@ import { type RootState, type AppDispatch } from '../store';
 import { setUser, clearUser, setLoading, setError } from '../store/authSlice';
 import { setNotifications } from '../store/notificationsSlice';
 import { setSubscriptions } from '../store/subscriptionsSlice';
+import { setEnrollments } from '../store/enrollmentsSlice';
+import { setProgress } from '../store/progressSlice';
 import { type User } from '../types';
 import api from '../lib/api';
 
@@ -12,12 +14,16 @@ export function useAuth() {
 
   const loadUserData = async () => {
     try {
-      const [notifRes, subRes] = await Promise.all([
+      const [notifRes, subRes, enrollRes, progressRes] = await Promise.all([
         api.get('/notifications'),
         api.get('/subscriptions'),
+        api.get('/enrollments'),
+        api.get('/progress'),
       ]);
       dispatch(setNotifications(notifRes.data));
       dispatch(setSubscriptions(subRes.data));
+      dispatch(setEnrollments(enrollRes.data.map((e: { courseId: string }) => e.courseId)));
+      dispatch(setProgress(progressRes.data));
     } catch {
       // non-critical, ignore
     }
@@ -71,6 +77,8 @@ export function useAuth() {
     dispatch(clearUser());
     dispatch(setNotifications([]));
     dispatch(setSubscriptions([]));
+    dispatch(setEnrollments([]));
+    dispatch(setProgress([]));
   };
 
   const restoreSession = async () => {

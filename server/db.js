@@ -90,11 +90,36 @@ db.exec(`
     UNIQUE(user_id, course_id, stage_id)
   );
 
+  CREATE TABLE IF NOT EXISTS enrollments (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    course_id TEXT NOT NULL,
+    email TEXT NOT NULL,
+    enrolled_at TEXT NOT NULL DEFAULT (datetime('now')),
+    UNIQUE(user_id, course_id)
+  );
+
+  CREATE TABLE IF NOT EXISTS questions (
+    id TEXT PRIMARY KEY,
+    exam_id TEXT NOT NULL,
+    text TEXT NOT NULL,
+    options TEXT NOT NULL DEFAULT '[]',
+    correct TEXT NOT NULL,
+    type TEXT NOT NULL DEFAULT 'single',
+    difficulty TEXT NOT NULL DEFAULT 'medium',
+    tags TEXT NOT NULL DEFAULT '[]',
+    explanation TEXT NOT NULL DEFAULT '',
+    trick TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+
   CREATE INDEX IF NOT EXISTS idx_subscriptions_user ON subscriptions(user_id);
   CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_id);
   CREATE INDEX IF NOT EXISTS idx_notifications_read ON notifications(user_id, read);
   CREATE INDEX IF NOT EXISTS idx_results_user ON exam_results(user_id);
   CREATE INDEX IF NOT EXISTS idx_progress_user ON course_progress(user_id);
+  CREATE INDEX IF NOT EXISTS idx_enrollments_user ON enrollments(user_id);
+  CREATE INDEX IF NOT EXISTS idx_questions_exam ON questions(exam_id);
 `);
 
 export default db;

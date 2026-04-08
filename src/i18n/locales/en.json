@@ -75,5 +75,11 @@
     "back": "Back",
     "next": "Next",
     "finish": "Finish"
+  },
+  "enrollment": {
+    "modalTitle": "Enroll in Course",
+    "emailPlaceholder": "Enter your email address",
+    "cancel": "Cancel",
+    "confirm": "Confirm Enrollment"
   }
 }
