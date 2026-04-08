@@ -1,16 +1,25 @@
+import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { type RootState } from '../store';
+import { useSelector, useDispatch } from 'react-redux';
+import { type RootState, type AppDispatch } from '../store';
+import { addToast } from '../store/uiSlice';
 import { mockCourses } from '../lib/mockData';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { EnrollmentModal } from '../components/ui/EnrollmentModal';
+import { useEnrollments } from '../hooks/useEnrollments';
 
 export function SubjectDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const courseProgress = useSelector((state: RootState) => state.progress.courseProgress);
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const { isEnrolled, enroll } = useEnrollments();
+  const [showModal, setShowModal] = useState(false);
 
   const course = mockCourses.find((c) => c.id === id);
 
@@ -26,9 +35,34 @@ export function SubjectDetailPage() {
     );
   }
 
+  const enrolled = isEnrolled(course.id);
   const progress = courseProgress[course.id] || [];
   const completedCount = progress.filter((p) => p.completed).length;
   const progressPercent = course.stages.length > 0 ? Math.round((completedCount / course.stages.length) * 100) : 0;
+
+  const handleEnrollOrStart = () => {
+    if (!isAuthenticated) {
+      dispatch(addToast({ message: 'Please sign in to enroll in courses.', type: 'info' }));
+      navigate('/signin');
+      return;
+    }
+    if (!enrolled) {
+      setShowModal(true);
+      return;
+    }
+    navigate(`/lessons/${course.stages.find((s) => !s.locked)?.id || course.stages[0].id}`);
+  };
+
+  const handleConfirmEnroll = async (email: string) => {
+    const ok = await enroll(course.id, email);
+    if (ok) {
+      dispatch(addToast({ message: `Enrolled in ${course.title}! Student ID: ${user?.id}`, type: 'success' }));
+      setTimeout(() => navigate(`/lessons/${course.stages.find((s) => !s.locked)?.id || course.stages[0].id}`), 1500);
+    } else {
+      dispatch(addToast({ message: 'Enrollment failed. You may already be enrolled.', type: 'error' }));
+      throw new Error('failed');
+    }
+  };
 
   const difficultyVariant = course.difficultyTag === 'easy' ? 'success' : course.difficultyTag === 'medium' ? 'warning' : 'error';
 
@@ -37,6 +71,7 @@ export function SubjectDetailPage() {
   const minutes = totalMinutes % 60;
 
   return (
+    <>
     <main id="main-content" className="min-h-screen bg-gray-50">
       {/* Hero */}
       <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
@@ -144,11 +179,11 @@ export function SubjectDetailPage() {
                 variant="primary"
                 size="lg"
                 className="w-full mb-3"
-                onClick={() => navigate(`/lessons/${course.stages.find((s) => !s.locked)?.id || course.stages[0].id}`)}
+                onClick={handleEnrollOrStart}
               >
-                {progressPercent > 0 ? t('courses.continue') : t('courses.enroll')}
+                {enrolled ? (progressPercent > 0 ? t('courses.continue') : 'Start Learning') : t('courses.enroll')}
               </Button>
-              {progressPercent === 0 && (
+              {!enrolled && (
                 <p className="text-xs text-gray-400 text-center">Free enrollment. Start learning immediately.</p>
               )}
 
@@ -187,6 +222,14 @@ export function SubjectDetailPage() {
         </div>
       </div>
     </main>
+    <EnrollmentModal
+      isOpen={showModal}
+      onClose={() => setShowModal(false)}
+      courseId={course.id}
+      courseTitle={course.title}
+      onConfirm={handleConfirmEnroll}
+    />
+    </>
   );
 }
 

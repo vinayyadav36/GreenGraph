@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -9,12 +9,26 @@ import { mockExamSession, examSessionQuestions } from '../lib/mockData';
 import { useExamTimer } from '../hooks/useExamTimer';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import api from '../lib/api';
 
 type ConfidenceLevel = 'confident' | 'guess';
 interface Answer {
   selected: string | string[];
   confidence: ConfidenceLevel;
   timeTaken: number;
+}
+
+interface ApiQuestion {
+  id: string;
+  examId: string;
+  text: string;
+  options: string[];
+  correct: string;
+  type: string;
+  difficulty: string;
+  tags: string[];
+  explanation: string;
+  trick?: string;
 }
 
 export function QuizPage() {
@@ -34,6 +48,23 @@ export function QuizPage() {
   const [flagged, setFlagged] = useState<Set<string>>(new Set());
   const [confidence, setConfidence] = useState<ConfidenceLevel>('confident');
   const [submitted, setSubmitted] = useState(false);
+  const [apiQuestions, setApiQuestions] = useState<ApiQuestion[] | null>(null);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
+
+  useEffect(() => {
+    if (!sessionId) return;
+    setIsLoadingQuestions(true);
+    api.get<ApiQuestion[]>(`/questions/${sessionId}`)
+      .then((res) => {
+        if (res.data && res.data.length > 0) {
+          setApiQuestions(res.data);
+        }
+      })
+      .catch(() => {
+        // fallback to mock data
+      })
+      .finally(() => setIsLoadingQuestions(false));
+  }, [sessionId]);
 
   const handleExpire = useCallback(() => {
     dispatch(addToast({ message: 'Time is up! Submitting your exam.', type: 'warning' }));
@@ -42,7 +73,19 @@ export function QuizPage() {
   }, []);
 
   const { formatted, secondsLeft } = useExamTimer(30 * 60, handleExpire);
-  const questions = session.questions;
+
+  const questions = apiQuestions
+    ? apiQuestions.map((q) => ({
+        id: q.id,
+        text: q.text,
+        options: q.options,
+        correct: q.correct,
+        type: q.type as 'single' | 'multi',
+        difficulty: q.difficulty as 'easy' | 'medium' | 'hard',
+        explanation: q.explanation,
+      }))
+    : session.questions;
+
   const currentQ = questions[currentIdx];
 
   const selectedAnswer = answers[currentQ?.id]?.selected;
@@ -71,13 +114,40 @@ export function QuizPage() {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (submitted) return;
     setSubmitted(true);
-    const answeredCount = Object.keys(answers).length;
-    const score = Math.round((answeredCount / questions.length) * 100);
+
+    let correctCount = 0;
+    questions.forEach((q) => {
+      const ans = answers[q.id];
+      if (!ans) return;
+      const isCorrect = Array.isArray(q.correct)
+        ? JSON.stringify([...(ans.selected as string[])].sort()) === JSON.stringify([...(q.correct as string[])].sort())
+        : ans.selected === q.correct;
+      if (isCorrect) correctCount++;
+    });
+
+    const score = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 0;
+    const timeTakenSeconds = 30 * 60 - secondsLeft;
+    const accuracy = questions.length > 0 ? correctCount / questions.length : 0;
+
     dispatch(addPoints(score));
-    dispatch(addToast({ message: `Exam submitted! You answered ${answeredCount}/${questions.length} questions.`, type: 'success' }));
-    navigate(`/results/${session.sessionId}`);
+
+    try {
+      const res = await api.post<{ id: string }>('/results', {
+        examId: sessionId,
+        score,
+        accuracy,
+        timeTakenSeconds,
+        topicBreakdown: {},
+      });
+      dispatch(addToast({ message: `Submitted! Score: ${score}%`, type: 'success' }));
+      setTimeout(() => navigate(`/results/${res.data.id}`), 2000);
+    } catch {
+      dispatch(addToast({ message: `Submitted! Score: ${score}%`, type: 'success' }));
+      setTimeout(() => navigate(`/results/demo`), 2000);
+    }
   };
 
   const isMultiSelected = (option: string) => Array.isArray(selectedAnswer) && selectedAnswer.includes(option);
@@ -86,6 +156,17 @@ export function QuizPage() {
 
   const progressPercent = Math.round((Object.keys(answers).length / questions.length) * 100);
   const isLowTime = secondsLeft <= 300;
+
+  if (isLoadingQuestions) {
+    return (
+      <main id="main-content" className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-500">Loading questions...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!currentQ) return null;
 

@@ -7,11 +7,13 @@ import { addToast } from '../store/uiSlice';
 import { mockCourses } from '../lib/mockData';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { useProgress } from '../hooks/useProgress';
 
 export function LessonModulePage() {
   const { stageId } = useParams<{ stageId: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const { saveProgress } = useProgress();
   const [isPlaying, setIsPlaying] = useState(false);
   const [completed, setCompleted] = useState(false);
 
@@ -47,6 +49,7 @@ export function LessonModulePage() {
   const handleMarkComplete = () => {
     dispatch(markStageComplete({ courseId: course.id, stageId: stage.id }));
     dispatch(addToast({ message: `"${stage.title}" marked as complete! +10 points`, type: 'success' }));
+    saveProgress(course.id, stage.id);
     setCompleted(true);
     if (nextStage && !nextStage.locked) {
       setTimeout(() => navigate(`/lessons/${nextStage.id}`), 1500);

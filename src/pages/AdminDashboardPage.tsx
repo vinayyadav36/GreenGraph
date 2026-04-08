@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { type RootState } from '../store';
 import { mockCourses, mockExamResults, resourceLinks as initialResources } from '../lib/mockData';
@@ -6,6 +6,7 @@ import { type ResourceLink } from '../types';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { useAuth } from '../hooks/useAuth';
+import api from '../lib/api';
 
 type AdminTab = 'overview' | 'resources' | 'courses' | 'questions';
 
@@ -289,8 +290,15 @@ export function AdminDashboardPage() {
   const { user } = useAuth();
   const progress = useSelector((state: RootState) => state.progress);
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
+  const [adminStats, setAdminStats] = useState<{ users: number; enrollments: number; results: number; questions: number } | null>(null);
 
   const totalStagesCompleted = Object.values(progress.courseProgress).flat().filter((s) => s.completed).length;
+
+  useEffect(() => {
+    api.get<{ users: number; enrollments: number; results: number; questions: number }>('/admin/stats')
+      .then((res) => setAdminStats(res.data))
+      .catch(() => { /* ignore */ });
+  }, []);
 
   const tabs: { key: AdminTab; label: string; icon: string }[] = [
     { key: 'overview', label: 'Overview', icon: '📊' },
@@ -335,10 +343,10 @@ export function AdminDashboardPage() {
           <>
             {/* Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatCard label="Total Courses" value={mockCourses.length} icon="📚" change="+5 this month" />
-              <StatCard label="Active Students" value="50,284" icon="👥" change="+1,230 this month" />
-              <StatCard label="Exams Completed" value={mockExamResults.length} icon="📝" />
-              <StatCard label="Stages Completed" value={totalStagesCompleted} icon="✅" />
+              <StatCard label="Total Users" value={adminStats?.users ?? '—'} icon="👥" />
+              <StatCard label="Enrollments" value={adminStats?.enrollments ?? '—'} icon="📚" />
+              <StatCard label="Exams Completed" value={adminStats?.results ?? mockExamResults.length} icon="📝" />
+              <StatCard label="Questions" value={adminStats?.questions ?? '—'} icon="❓" />
             </div>
 
             {/* Recent Activity */}
