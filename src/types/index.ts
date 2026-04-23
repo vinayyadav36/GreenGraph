@@ -95,3 +95,54 @@ export interface ResourceLink {
   color: string;
   badge: string;
 }
+
+// 1 = Monday … 6 = Saturday
+export type DayOfWeek = 1 | 2 | 3 | 4 | 5 | 6;
+
+export interface ScheduleSlot {
+  id: string;
+  courseId: string;
+  courseName: string;
+  subject: string;
+  /** Day of the week: 1 = Monday, 2 = Tuesday … 6 = Saturday */
+  dayOfWeek: DayOfWeek;
+  /** 24-hour start time, e.g. "09:00" */
+  startTime: string;
+  /** 24-hour end time, e.g. "10:30" */
+  endTime: string;
+  room: string;
+  /** Tailwind gradient classes for the colour bar */
+  color: string;
+}
+
+export type AssignmentStatus = 'not_started' | 'in_progress' | 'submitted' | 'graded';
+
+export interface Assignment {
+  id: string;
+  courseId: string;
+  courseName: string;
+  subject: string;
+  title: string;
+  /** ISO 8601 date string */
+  dueDate: string;
+  status: AssignmentStatus;
+  /** Percentage grade when status is 'graded' */
+  grade?: number;
+  maxMarks: number;
+}
+
+export interface GradeEntry {
+  courseId: string;
+  courseName: string;
+  subject: string;
+  /** Score out of 100 */
+  continuousAssessment: number;
+  /** Score out of 100 */
+  midterm: number;
+  /** Score out of 100 */
+  final: number;
+  /** Weighted total out of 100 */
+  total: number;
+  /** Letter grade: A+, A, B+, B, C, F */
+  letterGrade: string;
+}

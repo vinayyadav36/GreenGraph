@@ -18,6 +18,10 @@ const QuizPage = lazy(() => import('./pages/QuizPage'));
 const ResultPage = lazy(() => import('./pages/ResultPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const SchedulePage = lazy(() => import('./pages/SchedulePage'));
+const AssignmentsPage = lazy(() => import('./pages/AssignmentsPage'));
+const GradesPage = lazy(() => import('./pages/GradesPage'));
 const SignIn = lazy(() => import('./features/auth/SignIn'));
 const SignUp = lazy(() => import('./features/auth/SignUp'));
 const ForgotPassword = lazy(() => import('./features/auth/ForgotPassword'));
@@ -73,6 +77,38 @@ function App() {
                 element={
                   <AuthGuard>
                     <ProfilePage />
+                  </AuthGuard>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <AuthGuard>
+                    <DashboardPage />
+                  </AuthGuard>
+                }
+              />
+              <Route
+                path="/schedule"
+                element={
+                  <AuthGuard>
+                    <SchedulePage />
+                  </AuthGuard>
+                }
+              />
+              <Route
+                path="/assignments"
+                element={
+                  <AuthGuard>
+                    <AssignmentsPage />
+                  </AuthGuard>
+                }
+              />
+              <Route
+                path="/grades"
+                element={
+                  <AuthGuard>
+                    <GradesPage />
                   </AuthGuard>
                 }
               />

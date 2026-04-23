@@ -1,4 +1,4 @@
-import { type Course, type Question, type ExamResult, type ExamSession, type ExamCard, type ResourceLink } from '../types';
+import { type Course, type Question, type ExamResult, type ExamSession, type ExamCard, type ResourceLink, type ScheduleSlot, type Assignment, type GradeEntry } from '../types';
 
 export const mockCourses: Course[] = [
   // ─── Mathematics ────────────────────────────────────────────────────────────
@@ -1802,5 +1802,162 @@ export const resourceLinks: ResourceLink[] = [
     features: ['Official Source', 'Government Schemes', 'Daily Press Releases', 'UPSC Authentic Source'],
     color: 'from-orange-600 to-red-700',
     badge: 'Free',
+  },
+];
+
+// ─── Schedule ────────────────────────────────────────────────────────────────
+// dayOfWeek: 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat
+export const mockScheduleSlots: ScheduleSlot[] = [
+  { id: 'sch-1',  courseId: 'course-1',             courseName: 'Calculus I',                      subject: 'Mathematics',       dayOfWeek: 1, startTime: '09:00', endTime: '10:30', room: 'MA-201', color: 'from-blue-500 to-indigo-600' },
+  { id: 'sch-2',  courseId: 'course-1',             courseName: 'Calculus I',                      subject: 'Mathematics',       dayOfWeek: 3, startTime: '09:00', endTime: '10:30', room: 'MA-201', color: 'from-blue-500 to-indigo-600' },
+  { id: 'sch-3',  courseId: 'course-2',             courseName: 'Classical Mechanics',             subject: 'Physics',           dayOfWeek: 2, startTime: '11:00', endTime: '12:30', room: 'PH-105', color: 'from-purple-500 to-violet-600' },
+  { id: 'sch-4',  courseId: 'course-2',             courseName: 'Classical Mechanics',             subject: 'Physics',           dayOfWeek: 4, startTime: '11:00', endTime: '12:30', room: 'PH-105', color: 'from-purple-500 to-violet-600' },
+  { id: 'sch-5',  courseId: 'course-cs-dsa',        courseName: 'Data Structures & Algorithms',   subject: 'Computer Science',  dayOfWeek: 1, startTime: '14:00', endTime: '15:30', room: 'CS-302', color: 'from-green-500 to-teal-600' },
+  { id: 'sch-6',  courseId: 'course-cs-dsa',        courseName: 'Data Structures & Algorithms',   subject: 'Computer Science',  dayOfWeek: 5, startTime: '14:00', endTime: '15:30', room: 'CS-302', color: 'from-green-500 to-teal-600' },
+  { id: 'sch-7',  courseId: 'course-economics',     courseName: 'Microeconomics',                  subject: 'Economics',         dayOfWeek: 2, startTime: '14:00', endTime: '15:00', room: 'EC-101', color: 'from-yellow-500 to-orange-500' },
+  { id: 'sch-8',  courseId: 'course-economics',     courseName: 'Microeconomics',                  subject: 'Economics',         dayOfWeek: 4, startTime: '14:00', endTime: '15:00', room: 'EC-101', color: 'from-yellow-500 to-orange-500' },
+  { id: 'sch-9',  courseId: 'course-history',       courseName: 'Modern World History',            subject: 'History',           dayOfWeek: 3, startTime: '11:00', endTime: '12:00', room: 'HU-203', color: 'from-rose-500 to-pink-600' },
+  { id: 'sch-10', courseId: 'course-history',       courseName: 'Modern World History',            subject: 'History',           dayOfWeek: 5, startTime: '11:00', endTime: '12:00', room: 'HU-203', color: 'from-rose-500 to-pink-600' },
+  { id: 'sch-11', courseId: 'course-quantitative',  courseName: 'Quantitative Aptitude',           subject: 'Mathematics',       dayOfWeek: 6, startTime: '10:00', endTime: '12:00', room: 'MA-101', color: 'from-blue-500 to-indigo-600' },
+];
+
+// ─── Assignments ─────────────────────────────────────────────────────────────
+export const mockAssignments: Assignment[] = [
+  {
+    id: 'asgn-1',
+    courseId: 'course-1',
+    courseName: 'Calculus I',
+    subject: 'Mathematics',
+    title: 'Problem Set 1: Limits and Continuity',
+    dueDate: '2026-04-10',
+    status: 'graded',
+    grade: 85,
+    maxMarks: 100,
+  },
+  {
+    id: 'asgn-2',
+    courseId: 'course-2',
+    courseName: 'Classical Mechanics',
+    subject: 'Physics',
+    title: 'Lab Report: Newton\'s Laws Experiment',
+    dueDate: '2026-04-28',
+    status: 'in_progress',
+    maxMarks: 50,
+  },
+  {
+    id: 'asgn-3',
+    courseId: 'course-cs-dsa',
+    courseName: 'Data Structures & Algorithms',
+    subject: 'Computer Science',
+    title: 'Programming Assignment 2: Linked Lists',
+    dueDate: '2026-04-25',
+    status: 'not_started',
+    maxMarks: 100,
+  },
+  {
+    id: 'asgn-4',
+    courseId: 'course-economics',
+    courseName: 'Microeconomics',
+    subject: 'Economics',
+    title: 'Case Study: Market Equilibrium Analysis',
+    dueDate: '2026-04-20',
+    status: 'submitted',
+    maxMarks: 40,
+  },
+  {
+    id: 'asgn-5',
+    courseId: 'course-history',
+    courseName: 'Modern World History',
+    subject: 'History',
+    title: 'Essay: Causes of World War I',
+    dueDate: '2026-04-15',
+    status: 'graded',
+    grade: 72,
+    maxMarks: 100,
+  },
+  {
+    id: 'asgn-6',
+    courseId: 'course-1',
+    courseName: 'Calculus I',
+    subject: 'Mathematics',
+    title: 'Problem Set 2: Differentiation Rules',
+    dueDate: '2026-04-30',
+    status: 'not_started',
+    maxMarks: 100,
+  },
+  {
+    id: 'asgn-7',
+    courseId: 'course-cs-dsa',
+    courseName: 'Data Structures & Algorithms',
+    subject: 'Computer Science',
+    title: 'Mini Project: Binary Search Tree Visualizer',
+    dueDate: '2026-05-10',
+    status: 'not_started',
+    maxMarks: 150,
+  },
+  {
+    id: 'asgn-8',
+    courseId: 'course-2',
+    courseName: 'Classical Mechanics',
+    subject: 'Physics',
+    title: 'Problem Set 1: Kinematics',
+    dueDate: '2026-04-05',
+    status: 'graded',
+    grade: 91,
+    maxMarks: 100,
+  },
+];
+
+// ─── Grades ──────────────────────────────────────────────────────────────────
+export const mockGrades: GradeEntry[] = [
+  {
+    courseId: 'course-1',
+    courseName: 'Calculus I: Limits and Derivatives',
+    subject: 'Mathematics',
+    continuousAssessment: 85,
+    midterm: 78,
+    final: 0,
+    total: 68,
+    letterGrade: 'B+',
+  },
+  {
+    courseId: 'course-2',
+    courseName: 'Classical Mechanics',
+    subject: 'Physics',
+    continuousAssessment: 91,
+    midterm: 82,
+    final: 0,
+    total: 72,
+    letterGrade: 'A',
+  },
+  {
+    courseId: 'course-cs-dsa',
+    courseName: 'Data Structures & Algorithms',
+    subject: 'Computer Science',
+    continuousAssessment: 70,
+    midterm: 65,
+    final: 0,
+    total: 58,
+    letterGrade: 'B',
+  },
+  {
+    courseId: 'course-economics',
+    courseName: 'Microeconomics',
+    subject: 'Economics',
+    continuousAssessment: 88,
+    midterm: 90,
+    final: 0,
+    total: 74,
+    letterGrade: 'A',
+  },
+  {
+    courseId: 'course-history',
+    courseName: 'Modern World History',
+    subject: 'History',
+    continuousAssessment: 72,
+    midterm: 68,
+    final: 0,
+    total: 56,
+    letterGrade: 'B',
   },
 ];
