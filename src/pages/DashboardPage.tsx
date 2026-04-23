@@ -18,8 +18,8 @@ import { type ScheduleSlot, type Assignment, type AssignmentStatus } from '../ty
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
 function todayDayOfWeek(): number {
-  const d = new Date().getDay(); // 0=Sun
-  return d === 0 ? 7 : d; // return 1=Mon … 7=Sun
+  const d = new Date().getDay(); // 0=Sun, 1=Mon … 6=Sat
+  return d === 0 ? 1 : d; // Sunday falls back to Monday (no Sunday schedule)
 }
 
 function formatTime(t: string): string {

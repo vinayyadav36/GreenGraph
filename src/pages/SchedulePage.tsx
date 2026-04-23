@@ -25,10 +25,8 @@ const DAYS: { label: string; short: string; dow: DayOfWeek }[] = [
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
 function todayDayOfWeek(): DayOfWeek {
-  const d = new Date().getDay(); // 0=Sun
-  // clamp to 1-6 (Mon-Sat); Sun becomes 1 (Mon) as fallback
-  const mapped = d === 0 ? 1 : d > 6 ? 6 : (d as DayOfWeek);
-  return mapped;
+  const d = new Date().getDay(); // 0=Sun, 1=Mon … 6=Sat
+  return d === 0 ? 1 : (d as DayOfWeek); // Sunday falls back to Monday (no Sunday schedule)
 }
 
 function formatTime(t: string): string {
