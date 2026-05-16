@@ -30,6 +30,7 @@
     "dompurify": "^3.3.3",
     "exceljs": "^4.4.0",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
     "i18next": "^25.10.1",
     "idb": "^8.0.3",
     "jsonwebtoken": "^9.0.3",

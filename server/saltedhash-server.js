@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { rateLimit } from 'express-rate-limit';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -21,37 +22,20 @@ const allowedFiles = new Set([
 
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
-
-const routeBuckets = new Map();
-const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX_REQUESTS = 120;
-
-function rateLimit(req, res, next) {
-  const key = `${req.ip}:${req.method}:${req.path}`;
-  const now = Date.now();
-  const bucket = routeBuckets.get(key) || { count: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
-
-  if (now > bucket.resetAt) {
-    bucket.count = 0;
-    bucket.resetAt = now + RATE_LIMIT_WINDOW_MS;
-  }
-
-  bucket.count += 1;
-  routeBuckets.set(key, bucket);
-
-  if (bucket.count > RATE_LIMIT_MAX_REQUESTS) {
-    return res.status(429).json({ error: 'Too many requests' });
-  }
-
-  return next();
-}
+const ioLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests' },
+});
 
 function safeFilePath(name) {
   if (!allowedFiles.has(name)) return null;
   return path.join(DATA_DIR, `${name}.json`);
 }
 
-app.get('/api/data/:name', rateLimit, async (req, res) => {
+app.get('/api/data/:name', ioLimiter, async (req, res) => {
   const filePath = safeFilePath(req.params.name);
   if (!filePath) return res.status(400).json({ error: 'Invalid data file' });
 
@@ -63,7 +47,7 @@ app.get('/api/data/:name', rateLimit, async (req, res) => {
   }
 });
 
-app.post('/api/data/:name', rateLimit, async (req, res) => {
+app.post('/api/data/:name', ioLimiter, async (req, res) => {
   const filePath = safeFilePath(req.params.name);
   if (!filePath) return res.status(400).json({ error: 'Invalid data file' });
 
