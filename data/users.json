@@ -12,7 +12,17 @@
         "fundamentals": {},
         "exam": {}
       },
-      "resumes": []
+      "resumes": [
+        {
+          "id": "manual_resume_1778950926373",
+          "template_id": "tmpl_fresher_1",
+          "target_job_id": "job_1",
+          "values": {
+            "headline": "Entry-level analyst with Excel and Python exposure"
+          },
+          "saved_at": "2026-05-16T17:02:06.373Z"
+        }
+      ]
     }
   ]
 }
