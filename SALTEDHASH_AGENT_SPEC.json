@@ -1,0 +1,107 @@
+{
+  "project_meta": {
+    "brand_name": "SALTEDHASH",
+    "console_banner": "==================== SALTEDHASH ====================",
+    "offline_only": true,
+    "no_external_apis": true,
+    "no_db_servers": true,
+    "data_storage": "local JSON files only",
+    "primary_goal": "Build a self-contained, production-ready educational web app using local JSON as a NoSQL-like store, focused on fundamentals learning, NEET/JEE practice, and basic career tools.",
+    "session_rule": "Complete a minimal but working system in ONE agent session. Do not expand scope beyond this spec."
+  },
+  "hard_rules_for_agent": {
+    "1_scope": {
+      "description": "Never add new big features or new product lines not listed here.",
+      "allowed_modules": [
+        "fundamentals_lab",
+        "exam_engine",
+        "career_launchpad",
+        "project_studio (optional_minimal_stub_only)"
+      ]
+    },
+    "2_files_changes": {
+      "description": "Only create or edit files that are clearly required by the spec.",
+      "rules": [
+        "Before editing, quickly describe WHAT will change and WHY.",
+        "If a file would be identical after edit, DO NOT rewrite it.",
+        "No duplicate files with similar names (e.g., no app2, app_final)."
+      ]
+    },
+    "3_json_db_rules": {
+      "description": "Local JSON files act as a NoSQL-like database.",
+      "rules": [
+        "Do NOT use SQL.",
+        "Do NOT use external DB services.",
+        "All data stored under /data as JSON.",
+        "Each file must stay under ~5 MB during MVP.",
+        "Always load, modify in memory, then save back."
+      ]
+    },
+    "4_dev_efficiency": {
+      "description": "Avoid token and time waste.",
+      "rules": [
+        "Summarize the plan in <= 5 bullet points before generating code.",
+        "Generate only the minimal initial code to make module usable.",
+        "Prefer small components over huge monolithic files.",
+        "Never rewrite large code blocks just to change formatting or comments."
+      ]
+    },
+    "5_education_ethics": {
+      "description": "Platform must teach, not just give answers.",
+      "rules": [
+        "Always prompt learners to attempt before revealing full solutions.",
+        "Solutions should be stepwise and explanatory.",
+        "No 'one-click answer my homework' features for students."
+      ]
+    }
+  },
+  "folder_structure": {
+    "root": [
+      "README.md",
+      "CHANGELOG.md",
+      "package.json",
+      "src/",
+      "public/",
+      "data/",
+      "docs/"
+    ],
+    "src": [
+      "index.html",
+      "main.js",
+      "router.js",
+      "styles.css",
+      "components/",
+      "modules/"
+    ],
+    "src_components": [
+      "Navbar.js",
+      "Sidebar.js",
+      "Layout.js",
+      "Card.js",
+      "Button.js",
+      "ProgressBar.js"
+    ],
+    "src_modules": [
+      "FundamentalsLab/",
+      "ExamEngine/",
+      "CareerLaunchpad/",
+      "ProjectStudio/"
+    ],
+    "data": [
+      "users.json",
+      "fundamentals_concepts.json",
+      "fundamentals_questions.json",
+      "exam_questions.json",
+      "exam_results.json",
+      "projects.json",
+      "resume_templates.json",
+      "job_descriptions.json"
+    ],
+    "docs": [
+      "PRODUCT_OVERVIEW.md",
+      "PEDAGOGY_RULES.md",
+      "AGENT_OPERATIONS.md",
+      "DATA_MODEL.md"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "templates": [
+    {
+      "id": "tmpl_fresher_1",
+      "name": "Fresher ATS Basic",
+      "target_profile": "fresher",
+      "sections": [
+        {
+          "type": "summary",
+          "title": "Professional Summary",
+          "fields": [
+            { "field_key": "headline", "label": "Headline", "hint": "2-3 lines" }
+          ]
+        },
+        {
+          "type": "education",
+          "title": "Education",
+          "fields": [
+            { "field_key": "degree", "label": "Degree", "hint": "e.g., B.Tech" },
+            { "field_key": "institution", "label": "Institution", "hint": "School/College name" }
+          ]
+        },
+        {
+          "type": "skills",
+          "title": "Skills",
+          "fields": [
+            { "field_key": "primary_skills", "label": "Primary Skills", "hint": "comma separated" }
+          ]
+        }
+      ]
+    }
+  ]
+}

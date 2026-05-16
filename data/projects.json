@@ -1,0 +1,17 @@
+{
+  "projects": [
+    {
+      "id": "proj_1",
+      "title": "Simple Water Filter Model",
+      "grade_band": "6-8",
+      "subject": "science",
+      "difficulty": "easy",
+      "estimated_time_minutes": 30,
+      "materials": ["sand", "gravel", "cotton", "plastic bottle"],
+      "steps": [
+        { "step_index": 1, "instruction": "Layer materials in bottle.", "note_to_parent": "Supervise cutting." },
+        { "step_index": 2, "instruction": "Pour muddy water slowly.", "note_to_parent": "Discuss filtration concept." }
+      ]
+    }
+  ]
+}

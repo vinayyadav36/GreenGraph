@@ -1,0 +1,32 @@
+{
+  "concepts": [
+    {
+      "id": "fractions_intro",
+      "title": "Fractions Basics",
+      "subject": "math",
+      "grade_band": "7-8",
+      "short_description": "Understand numerator, denominator, and simple comparisons.",
+      "prerequisites": [],
+      "tags": ["fractions", "numbers"],
+      "visual_type": "fraction_pie",
+      "steps": [
+        {
+          "step_index": 1,
+          "type": "explanation",
+          "title": "Parts of a Whole",
+          "content_text": "A fraction represents equal parts of a whole object.",
+          "visual_config": { "type": "fraction_pie", "config": {} },
+          "prompt_to_student": "How many equal parts make one whole?"
+        },
+        {
+          "step_index": 2,
+          "type": "example",
+          "title": "Reading 3/4",
+          "content_text": "In 3/4, 3 is numerator and 4 is denominator.",
+          "visual_config": { "type": "text_only", "config": {} },
+          "prompt_to_student": "What does the denominator tell you?"
+        }
+      ]
+    }
+  ]
+}

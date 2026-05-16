@@ -1,0 +1,18 @@
+{
+  "questions": [
+    {
+      "id": "fq_1",
+      "concept_id": "fractions_intro",
+      "difficulty": "easy",
+      "question_type": "mcq",
+      "prompt": "Which fraction is greater?",
+      "options": ["1/4", "3/4", "2/8", "1/2"],
+      "correct_option_index": 1,
+      "correct_answer_value": null,
+      "explanation_steps": [
+        { "step_index": 1, "text": "Compare equivalent decimal values.", "hint": "Convert each fraction." },
+        { "step_index": 2, "text": "3/4 = 0.75 is largest here.", "hint": "0.75 > 0.5" }
+      ]
+    }
+  ]
+}
