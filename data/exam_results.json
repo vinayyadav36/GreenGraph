@@ -1,0 +1,23 @@
+{
+  "attempts": [
+    {
+      "id": "manual_1778950926351",
+      "user_id": "user_1",
+      "exam": "NEET",
+      "topic_id": "neet_physics_motion",
+      "mode": "topic_practice",
+      "started_at": "2026-05-16T17:02:06.351Z",
+      "completed_at": "2026-05-16T17:02:06.351Z",
+      "score": 4,
+      "total_marks": 4,
+      "details": [
+        {
+          "question_id": "eq_1",
+          "user_answer": 0,
+          "is_correct": true,
+          "time_spent_seconds": 20
+        }
+      ]
+    }
+  ]
+}

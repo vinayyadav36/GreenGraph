@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "id": "job_1",
+      "title": "Junior Data Analyst",
+      "company": "Sample Analytics",
+      "location": "Remote",
+      "keywords": ["excel", "sql", "python", "dashboard"],
+      "description": "Use Excel dashboards, SQL queries, and basic Python analysis to support reporting."
+    }
+  ]
+}

@@ -29,3 +29,7 @@ data/
 *.db
 *.db-shm
 *.db-wal
+
+# Keep SALTEDHASH JSON database files in version control
+!data/
+!data/*.json

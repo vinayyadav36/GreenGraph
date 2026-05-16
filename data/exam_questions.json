@@ -1,0 +1,58 @@
+{
+  "questions": [
+    {
+      "id": "eq_1",
+      "exam": "NEET",
+      "subject": "physics",
+      "topic_id": "neet_physics_motion",
+      "difficulty": "easy",
+      "question_type": "mcq",
+      "prompt": "SI unit of velocity is:",
+      "options": ["m/s", "m", "s", "m/s^2"],
+      "correct_option_index": 0,
+      "correct_answer_value": null,
+      "marks": 4,
+      "negative_marks": 1,
+      "solution_steps": [
+        { "step_index": 1, "text": "Velocity is displacement per unit time.", "hint": "distance/time pattern" },
+        { "step_index": 2, "text": "SI base units combine to meter per second.", "hint": "m and s" }
+      ]
+    },
+    {
+      "id": "eq_2",
+      "exam": "JEE",
+      "subject": "math",
+      "topic_id": "jee_math_quadratic",
+      "difficulty": "medium",
+      "question_type": "numeric",
+      "prompt": "Find x if x^2 = 9 and x is positive.",
+      "options": [],
+      "correct_option_index": null,
+      "correct_answer_value": 3,
+      "marks": 4,
+      "negative_marks": 0,
+      "solution_steps": [
+        { "step_index": 1, "text": "Take square root of both sides.", "hint": "x = ±3" },
+        { "step_index": 2, "text": "Given x is positive, x = 3.", "hint": "choose positive root" }
+      ]
+    }
+  ],
+  "topics": [
+    {
+      "id": "neet_physics_motion",
+      "exam": "NEET",
+      "subject": "physics",
+      "name": "Motion Basics",
+      "syllabus_reference": "Kinematics fundamentals",
+      "recommended_order": 1
+    },
+    {
+      "id": "jee_math_quadratic",
+      "exam": "JEE",
+      "subject": "math",
+      "name": "Quadratic Basics",
+      "syllabus_reference": "Algebra unit",
+      "recommended_order": 1
+    }
+  ]
+}
