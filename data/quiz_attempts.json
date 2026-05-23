@@ -1,13 +1,5 @@
 {
   "schema_version": "1.0.0",
   "updated_at": "2026-05-23T00:00:00.000Z",
-  "quiz_attempts": [
-    {
-      "id": "qa_77",
-      "studentId": "stu_21",
-      "score": 80,
-      "conceptsWeak": ["interest-rate-basics"],
-      "attemptedAt": "2026-05-23T00:00:00.000Z"
-    }
-  ]
+  "quiz_attempts": []
 }

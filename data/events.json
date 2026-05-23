@@ -1,14 +1,5 @@
 {
   "schema_version": "1.0.0",
   "updated_at": "2026-05-23T00:00:00.000Z",
-  "events": [
-    {
-      "id": "evt_07",
-      "type": "workshop",
-      "title": "Bootstrapped Growth Workshop",
-      "expertId": "exp_5",
-      "capacity": 80,
-      "visibility": "members"
-    }
-  ]
+  "events": []
 }

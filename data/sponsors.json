@@ -1,13 +1,5 @@
 {
   "schema_version": "1.0.0",
   "updated_at": "2026-05-23T00:00:00.000Z",
-  "sponsors": [
-    {
-      "id": "sp_3",
-      "issueId": "iss_101",
-      "placement": "mid-roll",
-      "status": "reserved",
-      "partnerName": "Demo Partner"
-    }
-  ]
+  "sponsors": []
 }

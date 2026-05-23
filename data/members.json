@@ -1,13 +1,5 @@
 {
   "schema_version": "1.0.0",
   "updated_at": "2026-05-23T00:00:00.000Z",
-  "members": [
-    {
-      "id": "mem_12",
-      "role": "member",
-      "tier": "pro",
-      "interests": ["climate", "bootstrapping"],
-      "displayName": "Demo Community Member"
-    }
-  ]
+  "members": []
 }

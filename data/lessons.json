@@ -1,13 +1,5 @@
 {
   "schema_version": "1.0.0",
   "updated_at": "2026-05-23T00:00:00.000Z",
-  "lessons": [
-    {
-      "id": "les_1",
-      "title": "Understanding Compounding Loan Realities",
-      "category": "Debt Literacy",
-      "checkpoints": ["q_11"],
-      "contentMarkdown": "### Educational simulation-only lesson content"
-    }
-  ]
+  "lessons": []
 }
