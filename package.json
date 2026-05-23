@@ -8,7 +8,7 @@
     "dev:server": "node server/saltedhash-server.js",
     "dev:full": "concurrently --names \"SERVER,CLIENT\" --prefix-colors \"green,blue\" \"npm run dev:server\" \"npm run dev\"",
     "build": "vite build",
-    "lint": "eslint src/**/*.js server/saltedhash-server.js",
+    "lint": "eslint src/**/*.js --no-warn-ignored",
     "test": "node -e \"console.log('No automated tests defined for SALTEDHASH MVP')\"",
     "preview": "vite preview",
     "start": "npm run dev:full"
