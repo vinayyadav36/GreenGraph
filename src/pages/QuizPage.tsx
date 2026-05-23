@@ -9,6 +9,7 @@ import { mockExamSession, examSessionQuestions } from '../lib/mockData';
 import { useExamTimer } from '../hooks/useExamTimer';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { SimulationPurposeBanner } from '../components/ui/SimulationPurposeBanner';
 import api from '../lib/api';
 
 type ConfidenceLevel = 'confident' | 'guess';
@@ -199,6 +200,7 @@ export function QuizPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <SimulationPurposeBanner />
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Question Panel */}
           <div className="lg:col-span-2 space-y-5">
