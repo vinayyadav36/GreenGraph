@@ -1,28 +1,48 @@
 {
   "users": [
     {
-      "id": "user_1",
-      "name": "Demo Learner",
-      "email": "demo@saltedhash.local",
+      "id": "usr_fe075c26-62c",
+      "email": "owner_1779535332@saltedhash.local",
+      "passwordHash": "$2b$12$sG78s/DMH2OpZjx/kNnOAe7B.5umDeZALEcVKtpZf2J9bcl1DvDQi",
       "role": "student",
-      "grade_level": "10",
-      "country": "India",
-      "created_at": "2026-05-16T00:00:00.000Z",
+      "grade_level": "",
+      "country": "",
+      "created_at": "2026-05-23T11:22:13.115Z",
       "progress": {
         "fundamentals": {},
         "exam": {}
       },
-      "resumes": [
-        {
-          "id": "manual_resume_1778950926373",
-          "template_id": "tmpl_fresher_1",
-          "target_job_id": "job_1",
-          "values": {
-            "headline": "Entry-level analyst with Excel and Python exposure"
-          },
-          "saved_at": "2026-05-16T17:02:06.373Z"
-        }
-      ]
+      "resumes": [],
+      "profile": {
+        "displayName": "Owner",
+        "declaredStudentDebt": 0,
+        "targetProfessionalSalary": 0,
+        "totalSimulationsExecuted": 0,
+        "resourceDownloadsCount": 0,
+        "premiumContentGatedViews": 0
+      }
+    },
+    {
+      "id": "usr_48ce8dbf-861",
+      "email": "owner_1779535433@saltedhash.local",
+      "passwordHash": "$2b$12$RIM3IcVx5bt8zFTbZQCeuuiLOyAm7UzFCeuKNsZOknJugcDDO.qaa",
+      "role": "student",
+      "grade_level": "",
+      "country": "",
+      "created_at": "2026-05-23T11:23:53.617Z",
+      "progress": {
+        "fundamentals": {},
+        "exam": {}
+      },
+      "resumes": [],
+      "profile": {
+        "displayName": "Owner",
+        "declaredStudentDebt": 0,
+        "targetProfessionalSalary": 0,
+        "totalSimulationsExecuted": 0,
+        "resourceDownloadsCount": 0,
+        "premiumContentGatedViews": 0
+      }
     }
   ]
 }

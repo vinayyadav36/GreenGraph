@@ -23,3 +23,17 @@ SALTEDHASH is an offline-first educational web app focused on fundamentals learn
 - No external APIs.
 - No SQL or DB servers.
 - Data persistence is done by reading and writing local JSON files in `/data`.
+- Active backend target is `server/saltedhash-server.js` (JSON-only persistence + local-only CORS policy).
+- JSON collections are initialized empty for production onboarding (no demo seed profiles in `data/users.json`).
+- JSON writes are now protected with atomic write + lock behavior in `server/jsonStore.js`.
+- Data payloads are validated at API entry using centralized schemas in `server/jsonSchemas.js`.
+
+## Blueprint Packs (Execution-Ready Foundations)
+- Community / Newsletter / Knowledge Networks data modules:
+  - `issues.json`, `resources.json`, `members.json`, `threads.json`, `events.json`, `sponsors.json`, `taxonomy.json`, `moderation.json`, `audit.json`
+- Finance / Learning / Student Support data modules:
+  - `students.json`, `lessons.json`, `concepts.json`, `budgets.json`, `scenarios.json`, `quiz_attempts.json`, `progress.json`, `guidance_rules.json`
+
+## Architecture Docs
+- `docs/SALTEDHASH_CORE_ENGINE_ARCHITECTURE.md`
+- `docs/DATA_MODEL.md`
