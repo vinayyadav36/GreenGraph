@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const simpleArrayRoot = (key) => z.object({ [key]: z.array(z.unknown()) }).passthrough();
 
-const isoDateString = z.string().datetime({ offset: true }).or(z.string());
+const isoDateString = z.string().datetime({ offset: true });
 const id = z.string().min(1);
 
 const issueSchema = z.object({
@@ -225,4 +225,3 @@ export function validateDataPayload(fileName, payload) {
 
   return { ok: true, data: parsed.data };
 }
-

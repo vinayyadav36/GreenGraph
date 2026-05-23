@@ -6,7 +6,9 @@ const writeLocks = new Map();
 function withWriteLock(filePath, operation) {
   const previous = writeLocks.get(filePath) ?? Promise.resolve();
   const next = previous
-    .catch(() => undefined)
+    .catch((error) => {
+      console.error(`[jsonStore] previous write operation failed for ${filePath}:`, error);
+    })
     .then(operation);
 
   writeLocks.set(
@@ -49,4 +51,3 @@ export async function writeJsonFileAtomic(filePath, payload) {
 export async function writeJsonFileLocked(filePath, payload) {
   return withWriteLock(filePath, () => writeJsonFileAtomic(filePath, payload));
 }
-

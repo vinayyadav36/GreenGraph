@@ -1,3 +1,48 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "usr_fe075c26-62c",
+      "email": "owner_1779535332@saltedhash.local",
+      "passwordHash": "$2b$12$sG78s/DMH2OpZjx/kNnOAe7B.5umDeZALEcVKtpZf2J9bcl1DvDQi",
+      "role": "student",
+      "grade_level": "",
+      "country": "",
+      "created_at": "2026-05-23T11:22:13.115Z",
+      "progress": {
+        "fundamentals": {},
+        "exam": {}
+      },
+      "resumes": [],
+      "profile": {
+        "displayName": "Owner",
+        "declaredStudentDebt": 0,
+        "targetProfessionalSalary": 0,
+        "totalSimulationsExecuted": 0,
+        "resourceDownloadsCount": 0,
+        "premiumContentGatedViews": 0
+      }
+    },
+    {
+      "id": "usr_48ce8dbf-861",
+      "email": "owner_1779535433@saltedhash.local",
+      "passwordHash": "$2b$12$RIM3IcVx5bt8zFTbZQCeuuiLOyAm7UzFCeuKNsZOknJugcDDO.qaa",
+      "role": "student",
+      "grade_level": "",
+      "country": "",
+      "created_at": "2026-05-23T11:23:53.617Z",
+      "progress": {
+        "fundamentals": {},
+        "exam": {}
+      },
+      "resumes": [],
+      "profile": {
+        "displayName": "Owner",
+        "declaredStudentDebt": 0,
+        "targetProfessionalSalary": 0,
+        "totalSimulationsExecuted": 0,
+        "resourceDownloadsCount": 0,
+        "premiumContentGatedViews": 0
+      }
+    }
+  ]
 }
