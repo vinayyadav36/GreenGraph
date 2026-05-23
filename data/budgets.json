@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "budgets": [
+    {
+      "id": "bud_1",
+      "studentId": "stu_21",
+      "income": 12000,
+      "fixedExpenses": 7000,
+      "variableExpenses": 2500
+    }
+  ]
+}

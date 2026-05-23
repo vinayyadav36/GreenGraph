@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "events": [
+    {
+      "id": "aud_1",
+      "actorId": "system",
+      "action": "bootstrap",
+      "entityType": "issues",
+      "entityId": "iss_101",
+      "createdAt": "2026-05-23T00:00:00.000Z"
+    }
+  ]
+}

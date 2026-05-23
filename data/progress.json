@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "progress": [
+    {
+      "studentId": "stu_21",
+      "lessonsCompleted": 14,
+      "simulationsRun": 9,
+      "streakDays": 6
+    }
+  ]
+}

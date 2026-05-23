@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "scenarios": [
+    {
+      "id": "sc_9",
+      "title": "Internship vs Part-time Job",
+      "inputs": ["hours", "stipend"],
+      "checkpointIds": ["q_11"]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "guidance_rules": [
+    {
+      "id": "gr_1",
+      "trigger": "high_debt_to_income",
+      "tip": "Try reducing fixed expenses before increasing discretionary spend.",
+      "disclaimer": "Educational simulation only. Not financial advice."
+    }
+  ]
+}

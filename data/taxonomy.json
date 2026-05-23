@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "topics": [
+    {
+      "id": "top_1",
+      "name": "Sustainable Finance",
+      "slug": "sustainable-finance",
+      "parentId": null
+    }
+  ],
+  "tags": [
+    {
+      "id": "tag_1",
+      "name": "Microstartup",
+      "slug": "microstartup",
+      "topicId": "top_1"
+    }
+  ]
+}

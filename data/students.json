@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "students": [
+    {
+      "id": "stu_21",
+      "grade": "college-year-1",
+      "goals": ["build-emergency-fund"],
+      "riskComfort": "low",
+      "createdAt": "2026-05-23T00:00:00.000Z"
+    }
+  ]
+}

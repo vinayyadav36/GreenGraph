@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import { rateLimit } from 'express-rate-limit';
-import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { readJsonFile, writeJsonFileLocked } from './jsonStore.js';
+import { validateDataPayload } from './jsonSchemas.js';
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -18,6 +19,23 @@ const allowedFiles = new Set([
   'projects',
   'resume_templates',
   'job_descriptions',
+  'issues',
+  'resources',
+  'members',
+  'threads',
+  'events',
+  'sponsors',
+  'taxonomy',
+  'moderation',
+  'audit',
+  'students',
+  'lessons',
+  'concepts',
+  'budgets',
+  'scenarios',
+  'quiz_attempts',
+  'progress',
+  'guidance_rules',
 ]);
 
 app.use(cors());
@@ -40,8 +58,8 @@ app.get('/api/data/:name', ioLimiter, async (req, res) => {
   if (!filePath) return res.status(400).json({ error: 'Invalid data file' });
 
   try {
-    const content = await fs.readFile(filePath, 'utf-8');
-    return res.json(JSON.parse(content));
+    const content = await readJsonFile(filePath);
+    return res.json(content);
   } catch (err) {
     return res.status(500).json({ error: 'Failed to read JSON file', details: err.message });
   }
@@ -57,9 +75,16 @@ app.post('/api/data/:name', ioLimiter, async (req, res) => {
       return res.status(400).json({ error: 'Payload must be a JSON object' });
     }
 
-    const serialized = `${JSON.stringify(payload, null, 2)}\n`;
-    await fs.writeFile(filePath, serialized, 'utf-8');
-    return res.json({ ok: true });
+    const validation = validateDataPayload(req.params.name, payload);
+    if (!validation.ok) {
+      return res.status(400).json({
+        error: 'Schema validation failed',
+        details: validation.error,
+      });
+    }
+
+    await writeJsonFileLocked(filePath, validation.data);
+    return res.json({ ok: true, mode: 'atomic_write_locked' });
   } catch (err) {
     return res.status(500).json({ error: 'Failed to write JSON file', details: err.message });
   }

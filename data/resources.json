@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-05-23T00:00:00.000Z",
+  "resources": [
+    {
+      "id": "res_44",
+      "type": "guide",
+      "title": "Startup GTM Checklist",
+      "topics": ["microstartup"],
+      "visibility": "members",
+      "summary": "Curated startup go-to-market checklist for founder operators."
+    }
+  ]
+}
